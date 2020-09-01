@@ -1,0 +1,22 @@
+--- # Create Docker private repo i.e ayazway/nodejs-test
+  - hosts: ansible-server
+    user: ec2-user
+    become: yes
+    connection: ssh
+
+    tasks:
+
+      - name: Delete a docker image
+        command: docker rmi -f myimg:latest ayazway/nodejs-test:latest
+        ignore_errors: true
+
+      - name: Create a docker image
+        command: docker build -t  myimg .
+        args:
+          chdir: /home/ec2-user
+
+      - name: Tag docker image
+        command: docker tag myimg ayazway/nodejs-test
+        
+      - name: Push docker image to dockerhub
+        command: docker push ayazway/nodejs-test

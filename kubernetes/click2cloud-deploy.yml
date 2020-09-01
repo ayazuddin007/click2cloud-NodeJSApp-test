@@ -1,0 +1,35 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: click2cloud-deployment
+spec:
+  selector:
+    matchLabels:
+      app: click2cloud-devops-project
+  replicas: 10 # tells deployment to run 2 pods matching the template
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 3
+
+  template:
+    metadata:
+      labels:
+        app: click2cloud-devops-project
+    spec:
+      containers:
+      - name: click2cloud-devops-project
+        image: ayazway/nodejs-test:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "18Mi"
+            cpu: "100m"
+          limits:
+            memory: "32Mi"
+            cpu: "200m"
+      imagePullSecrets:
+      - name: regcred

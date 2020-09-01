@@ -1,0 +1,18 @@
+kind: HorizontalPodAutoscaler 
+apiVersion: autoscaling/v2beta1 
+metadata: 
+  name: click2cloud-scaling
+spec: 
+  maxReplicas: 10
+  minReplicas: 7
+  scaleTargetRef: 
+    apiVersion: app/v1 
+    kind: Deployment 
+    name: click2cloud-deployment 
+  metrics: 
+  - type: Resource 
+    resource: 
+      name: cpu 
+      targetAverageUtilization: 50
+      name: memory
+      targetAverageValue: 60M

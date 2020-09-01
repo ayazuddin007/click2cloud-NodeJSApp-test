@@ -1,0 +1,12 @@
+--- # create service for deployment
+- hosts: kubernetes
+  user: root
+  become: yes
+  connection: ssh
+
+  tasks:
+  - name: copy a service file to Kubernetes
+    copy: src=./kubernetes/click2cloud-service.yml dest=/root/
+    
+  - name: create a service
+    command: kubectl apply -f click2cloud-service.yml

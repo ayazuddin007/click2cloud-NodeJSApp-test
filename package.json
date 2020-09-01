@@ -1,0 +1,14 @@
+{
+  "name": "NodeJSApp",
+  "version": "1.0.0",
+  "description": "Node.js CI-CD Pipelne",
+  "author": "Ayazuddin s.ayazuddin007@gmail.com",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+  
+}
